@@ -1,0 +1,59 @@
+<%- model_class = Crp -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:country_code) %>:</strong></dt>
+  <dd><%= @crp.country_code %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:country_name) %>:</strong></dt>
+  <dd><%= @crp.country_name %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:selling_rate) %>:</strong></dt>
+  <dd><%= @crp.selling_rate %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:billing_increment) %>:</strong></dt>
+  <dd><%= @crp.billing_increment %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:asr) %>:</strong></dt>
+  <dd><%= @crp.asr %>&nbsp;%</dd>
+  <dt><strong><%= model_class.human_attribute_name(:acd) %>:</strong></dt>
+  <dd><%= @crp.acd %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:pdd) %>:</strong></dt>
+  <dd><%= @crp.pdd %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:capacity) %>:</strong></dt>
+  <dd><%= @crp.capacity %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:buy_lower_range) %>:</strong></dt>
+  <dd><%= @crp.buy_lower_range %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:buy_upper_range) %>:</strong></dt>
+  <dd><%= @crp.buy_upper_range %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:sell_lower_range) %>:</strong></dt>
+  <dd><%= @crp.sell_lower_range %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:sell_upper_range) %>:</strong></dt>
+  <dd><%= @crp.sell_upper_range %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:vendor1) %>:</strong></dt>
+  <dd><%= @crp.vendor1 %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:vendor2) %>:</strong></dt>
+  <dd><%= @crp.vendor2 %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:vendor3) %>:</strong></dt>
+  <dd><%= @crp.vendor3 %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:vendor4) %>:</strong></dt>
+  <dd><%= @crp.vendor4 %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:route_type) %>:</strong></dt>
+  <dd><%= @crp.route_type %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:service_level) %>:</strong></dt>
+  <dd><%= @crp.service_level %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:quality) %>:</strong></dt>
+  <dd><%= @crp.quality %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:remarks) %>:</strong></dt>
+  <dd><%= @crp.remarks %>&nbsp;</dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              crps_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_crp_path(@crp), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              crp_path(@crp),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

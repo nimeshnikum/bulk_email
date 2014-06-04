@@ -1,0 +1,128 @@
+<%= form_for @account, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :number, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :number, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :short_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :short_name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :official_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :official_name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :address, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :address, :class => 'text_area', :rows => 3 %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :legal_email, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :legal_email, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :dispute_email, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :dispute_email, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :credit_limit, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :credit_limit, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :credit_limit_history, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :credit_limit_history, :class => 'text_area', :rows => 3 %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :max_block_limit, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :max_block_limit, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :payment_term, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :payment_term, payment_term_options, :prompt => '-- Select --' %>
+    </div>
+  </div>
+  <div class="control-group" id="payment_cycle_box">
+    <%= f.label :payment_cycle, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :payment_cycle, payment_cycle_options, :prompt => '-- Select --' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :customer_type, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :customer_type, customer_type_options, :prompt => '-- Select --' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :last_invoice_amount, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :last_invoice_amount, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :last_invoice_date, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :last_invoice_date, :class => 'text_field', :value => date_format(@account.last_invoice_date) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :current_balance, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :current_balance, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :current_balance_date, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :current_balance_date, :class => 'text_field', :value => date_format(@account.current_balance_date) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :grade, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :grade, grade_options, :prompt => '-- Select --' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :status, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :status, :class => 'check_box' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :status_history, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :status_history, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :opt_in, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :opt_in, :class => 'check_box' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                accounts_path, :class => 'btn' %>
+  </div>
+<% end %>

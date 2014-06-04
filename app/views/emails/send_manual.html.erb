@@ -1,0 +1,54 @@
+<div class="page-header">
+  <h1>Send manual email</h1>
+</div>
+
+<%= form_for @email, :url => send_manual_emails_path, :html => { :class => 'form-horizontal', :method => :post } do |f| %>
+  <div class="control-group">
+    <%= f.label 'Customer', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :account_id, account_options(@accounts), :include_blank => "-- Select --" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label 'Template', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :email_template_id, email_template_options, :include_blank => "-- Select --" %>
+    </div>
+  </div>
+  <div class="control-group top_routes_box">
+    <%= f.label 'Top Routes', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :top_route_ids, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :subject, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :subject, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :body, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :body, :class => 'text_area' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit 'Send email', :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                email_templates_path, :class => 'btn' %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $(function(){
+    $("#email_top_route_ids").tokenInput("/top_routes/search",
+    {
+      prePopulate: <%= @top_routes.to_json %>,
+      hintText: 'Type in a top route country name',
+      preventDuplicates: true,
+      propertyToSearch: 'country_name'
+    });
+  })
+</script>

@@ -1,0 +1,68 @@
+<%= form_for @top_route, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :country_code, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :country_code, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :country_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :country_name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :selling_rate, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :selling_rate, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :asr, :class => 'control-label' %>
+    <div class="controls">
+  <%= f.text_field :asr, :class => 'text_field' %> %
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :acd, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :acd, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :capacity, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :capacity, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :service_level, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :service_level, service_level_options, :include_blank => "-- Select --" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :quality, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :quality, quality_options, :include_blank => "-- Select --" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :remarks, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :remarks, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :select_for_promotion, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :select_for_promotion, :class => 'check_box' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                top_routes_path, :class => 'btn' %>
+  </div>
+<% end %>

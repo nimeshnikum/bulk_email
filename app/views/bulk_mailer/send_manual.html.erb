@@ -1,0 +1,3 @@
+<p><%= sanitize(@email.body) %> </p>
+
+<%= render :partial => "top_routes" if @email.email_template_id == '3' %>

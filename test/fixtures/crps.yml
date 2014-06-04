@@ -1,0 +1,45 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  country_code: 1
+  country_name: MyString
+  selling_rate: 9.99
+  billing_increment: 1
+  asr: 9.99
+  acd: 9.99
+  pdd: 9.99
+  capacity: MyString
+  buy_lower_range: 9.99
+  buy_upper_range: 9.99
+  sell_lower_range: 9.99
+  sell_upper_range: 9.99
+  vendor1: MyString
+  vendor2: MyString
+  vendor3: MyString
+  vendor4: MyString
+  route_type: MyString
+  service_level: MyString
+  quality: MyString
+  remarks: MyString
+
+two:
+  country_code: 1
+  country_name: MyString
+  selling_rate: 9.99
+  billing_increment: 1
+  asr: 9.99
+  acd: 9.99
+  pdd: 9.99
+  capacity: MyString
+  buy_lower_range: 9.99
+  buy_upper_range: 9.99
+  sell_lower_range: 9.99
+  sell_upper_range: 9.99
+  vendor1: MyString
+  vendor2: MyString
+  vendor3: MyString
+  vendor4: MyString
+  route_type: MyString
+  service_level: MyString
+  quality: MyString
+  remarks: MyString

@@ -1,0 +1,128 @@
+<%= form_for @crp, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :country_code, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :country_code, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :country_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :country_name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :selling_rate, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :selling_rate, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :billing_increment, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :billing_increment, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :asr, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :asr, :class => 'text_field' %> %
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :acd, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :acd, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :pdd, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :pdd, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :capacity, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :capacity, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :buy_lower_range, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :buy_lower_range, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :buy_upper_range, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :buy_upper_range, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :sell_lower_range, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :sell_lower_range, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :sell_upper_range, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :sell_upper_range, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :vendor1, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :vendor1, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :vendor2, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :vendor2, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :vendor3, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :vendor3, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :vendor4, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :vendor4, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :route_type, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :route_type, route_type_options, :include_blank => "-- Select --" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :service_level, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :service_level, service_level_options, :include_blank => "-- Select --" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :quality, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :quality, quality_options, :include_blank => "-- Select --" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :remarks, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :remarks, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                crps_path, :class => 'btn' %>
+  </div>
+<% end %>

@@ -1,0 +1,42 @@
+<%- model_class = AccountContact -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:phone) %></th>
+      <th><%= model_class.human_attribute_name(:email) %></th>
+      <th><%= model_class.human_attribute_name(:skype) %></th>
+      <th><%= model_class.human_attribute_name(:role_id) %></th>
+      <th><%= model_class.human_attribute_name(:main_contact) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @account_contacts.each do |account_contact| %>
+      <tr>
+        <td><%= link_to(account_contact.name, account_account_contact_path(@account, account_contact)) %></td>
+        <td><%= account_contact.phone %></td>
+        <td><%= account_contact.email %></td>
+        <td><%= account_contact.skype %></td>
+        <td><%= account_contact.role.name %></td>
+        <td><%= account_contact.main_contact ? 'Yes' : 'No' %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_account_account_contact_path(@account, account_contact), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      account_account_contact_path(@account, account_contact),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_account_account_contact_path,
+            :class => 'btn btn-primary' %>

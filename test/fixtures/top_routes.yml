@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  country_code: 1
+  country_name: MyString
+  selling_rate: 9.99
+  asr: 9.99
+  acd: 9.99
+  capacity: MyString
+  service_level: MyString
+  quality: MyString
+  remarks: MyString
+  select_for_promotion: false
+
+two:
+  country_code: 1
+  country_name: MyString
+  selling_rate: 9.99
+  asr: 9.99
+  acd: 9.99
+  capacity: MyString
+  service_level: MyString
+  quality: MyString
+  remarks: MyString
+  select_for_promotion: false

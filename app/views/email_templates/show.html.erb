@@ -1,0 +1,30 @@
+<%- model_class = EmailTemplate -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @email_template.name %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:subject) %>:</strong></dt>
+  <dd><%= @email_template.subject %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:body) %>:</strong></dt>
+  <dd><%= sanitize(@email_template.body) %>&nbsp;</dd>
+  <%#*<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>%>
+  <dt><strong><%= model_class.human_attribute_name(:from) %>:</strong></dt>
+  <dd><%= @email_template.from %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:is_default) %>:</strong></dt>
+  <dd><%= @email_template.is_default ? 'Yes' : 'No' %>&nbsp;</dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              email_templates_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_email_template_path(@email_template), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              email_template_path(@email_template),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

@@ -1,0 +1,59 @@
+<%- model_class = Account -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:number) %>:</strong></dt>
+  <dd><%= @account.number %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:short_name) %>:</strong></dt>
+  <dd><%= @account.short_name %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:official_name) %>:</strong></dt>
+  <dd><%= @account.official_name %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
+  <dd><%= @account.address %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:legal_email) %>:</strong></dt>
+  <dd><%= @account.legal_email %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:dispute_email) %>:</strong></dt>
+  <dd><%= @account.dispute_email %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:credit_limit) %>:</strong></dt>
+  <dd><%= @account.credit_limit %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:credit_limit_history) %>:</strong></dt>
+  <dd><%= @account.credit_limit_history %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:max_block_limit) %>:</strong></dt>
+  <dd><%= @account.max_block_limit %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:payment_term) %>:</strong></dt>
+  <dd><%= @account.payment_term %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:payment_cycle) %>:</strong></dt>
+  <dd><%= @account.payment_cycle %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:customer_type) %>:</strong></dt>
+  <dd><%= @account.customer_type %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:last_invoice_amount) %>:</strong></dt>
+  <dd><%= @account.last_invoice_amount %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:last_invoice_date) %>:</strong></dt>
+  <dd><%= date_format(@account.last_invoice_date) %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:current_balance) %>:</strong></dt>
+  <dd><%= @account.current_balance %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:current_balance_date) %>:</strong></dt>
+  <dd><%= date_format(@account.current_balance_date) %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:grade) %>:</strong></dt>
+  <dd><%= @account.grade %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
+  <dd><%= @account.status %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:status_history) %>:</strong></dt>
+  <dd><%= @account.status_history %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:opt_in) %>:</strong></dt>
+  <dd><%= @account.opt_in %>&nbsp;</dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              accounts_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_account_path(@account), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              account_path(@account),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

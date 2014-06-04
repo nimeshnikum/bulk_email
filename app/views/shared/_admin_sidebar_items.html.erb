@@ -1,0 +1,12 @@
+<% if current_user && current_user.admin? %>
+  <li><%= link_to 'Users', users_path %></li>
+  <li><%= link_to 'Accounts', accounts_path %></li>
+  <li><%= link_to 'Prospects', prospects_path %></li>
+  <li><%= link_to 'Top Routes', top_routes_path %></li>
+  <li><%= link_to 'CRP', crps_path %></li>
+  <li><%= link_to 'Email Templates', email_templates_path %></li>
+<% elsif current_user %>
+  <li><%= link_to 'Email Templates', email_templates_path %></li>
+  <li><%= link_to 'Send email to yourself', send_to_self_emails_path %></li>
+  <li><%= link_to 'Send manual email', send_manual_emails_path %></li>
+<% end %>

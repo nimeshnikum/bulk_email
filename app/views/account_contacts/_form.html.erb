@@ -1,0 +1,56 @@
+<%= form_for [@account, @account_contact], :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :phone, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :phone, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :email, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :email, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :skype, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :skype, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :msn, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :msn, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :icq, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :icq, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :role_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :role_id, Role.for_account_contact.collect {|role| [role.name, role.id]}, :prompt => 'Select Role' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :main_contact, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :main_contact, :class => 'check_box' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                account_account_contacts_path(@account), :class => 'btn' %>
+  </div>
+<% end %>
