@@ -23,17 +23,16 @@ class EmailsController < ApplicationController
 
     if request.post?
       @email = Email.new(params[:email])
-      @account = Account.find(params[:email][:account_id])
-      if params[:email][:email_template_id] == '3'
-        @top_routes = TopRoute.find(params[:email][:top_route_ids].split(','))
-      end
+
       if @email.valid?
-        BulkMailer.send_manual(current_user, @email, @account, @top_routes).deliver
+        @top_routes = TopRoute.find(params[:email][:top_route_ids].split(','))
+        @email.account_ids.each do |account_id|
+          account = Account.find(account_id)
+          BulkMailer.send_manual(current_user, @email, account, @top_routes).deliver
+        end
         flash[:notice] = "Email sent successfully!"
         redirect_to send_manual_emails_url
       else
-        p "11111111111111"
-        p @email.errors
         render :action => 'send_manual'
       end
       

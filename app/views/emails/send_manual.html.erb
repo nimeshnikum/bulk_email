@@ -6,8 +6,18 @@
   <div class="control-group">
     <%= f.label 'Customer', :class => 'control-label' %>
     <div class="controls">
-      <%= f.select :account_id, account_options(@accounts), :include_blank => "-- Select --" %>
+      <%= check_box_tag('select_all', "all", false, {:class => 'multiple_checkbox'}) %>
+      <%= label_tag "select_all", "Select all", class: 'check_box_label' %>
     </div>
+    <% @accounts.each do |account| %>
+      <div class="controls">
+        <%= f.check_box(:account_ids, { :multiple => true, :class => 'multiple_checkbox', :disabled => !account.has_contacts? }, account.id, nil) %> &nbsp;
+        <%= label_tag "email_account_ids_#{account.id}", account.number, class: 'check_box_label' %>
+        <% unless account.has_contacts? %>
+          <span class="disabled_red">Customer does not have a single contact to send email. Add contact to enable it!</span>
+        <% end %>
+      </div>
+    <% end %>
   </div>
   <div class="control-group">
     <%= f.label 'Template', :class => 'control-label' %>

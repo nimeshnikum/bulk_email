@@ -17,4 +17,12 @@ class Account < ActiveRecord::Base
   def cc_contacts
     account_contacts.cc.collect(&:email)
   end
+
+  def all_emails
+    account_contacts.map(&:email)
+  end
+
+  def has_contacts?
+    !all_emails.blank?
+  end
 end

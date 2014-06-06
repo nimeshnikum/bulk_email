@@ -1,0 +1,14 @@
+
+.check_box_label {
+    display: inline-block;
+}
+
+.disabled_red {
+    font-size: 10px;
+    color: red;
+    display: inline-block;
+}
+
+.multiple_checkbox {
+    margin-top: 0 !important;
+}
