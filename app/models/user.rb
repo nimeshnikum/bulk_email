@@ -27,4 +27,8 @@ class User < ActiveRecord::Base
   def role_name
     (role && role.name).to_s
   end
+
+  def sales_user?
+    role_name.eql?('Sales')
+  end
 end
