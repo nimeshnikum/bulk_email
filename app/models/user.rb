@@ -31,4 +31,8 @@ class User < ActiveRecord::Base
   def sales_user?
     role_name.eql?('Sales')
   end
+
+  def title
+    first_name || number || email
+  end
 end

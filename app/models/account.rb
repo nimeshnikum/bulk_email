@@ -25,4 +25,8 @@ class Account < ActiveRecord::Base
   def has_contacts?
     !all_emails.blank?
   end
+
+  def title
+    number || short_name
+  end
 end

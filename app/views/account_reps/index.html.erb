@@ -1,6 +1,6 @@
 <%- model_class = AccountRep -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1>Account Reps for <%= link_to @user.title.to_s, @user unless @user.title.nil? %></h1>
 </div>
 <table class="table table-striped">
   <thead>
@@ -34,3 +34,4 @@
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_user_account_rep_path(@user),
             :class => 'btn btn-primary' %>
+<%= link_to 'Back', users_path, :class => 'btn' %>

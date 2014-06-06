@@ -1,6 +1,6 @@
 <%- model_class = AccountContact -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1>Account Contacts for <%= link_to @account.title, account_path(@account) unless @account.title.nil? %></h1>
 </div>
 <table class="table table-striped">
   <thead>
@@ -40,3 +40,4 @@
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_account_account_contact_path,
             :class => 'btn btn-primary' %>
+<%= link_to 'Back', accounts_path, :class => 'btn'  %>
