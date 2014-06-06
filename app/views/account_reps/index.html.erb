@@ -14,8 +14,8 @@
   <tbody>
     <% @account_reps.each do |account_rep| %>
       <tr>
-        <td><%= account_rep.user_id %></td>
-        <td><%= account_rep.account_id %></td>
+        <td><%= account_rep.user.email %></td>
+        <td><%= account_rep.account.try(:number) %></td>
         <td><%= account_rep.rep_level %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
