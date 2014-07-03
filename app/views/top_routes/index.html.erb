@@ -10,6 +10,10 @@
       <th><%= model_class.human_attribute_name(:selling_rate) %></th>
       <th><%= model_class.human_attribute_name(:asr) %></th>
       <th><%= model_class.human_attribute_name(:acd) %></th>
+      <th><%= model_class.human_attribute_name(:capacity) %></th>
+      <th><%= model_class.human_attribute_name(:service_level) %></th>
+      <th><%= model_class.human_attribute_name(:quality) %></th>
+      <th><%= model_class.human_attribute_name(:remarks) %></th>
       <th><%= model_class.human_attribute_name(:select_for_promotion) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -18,10 +22,14 @@
     <% @top_routes.each do |top_route| %>
       <tr>
         <td><%= link_to top_route.country_code, top_route_path(top_route) %></td>
-        <td><%= top_route.country_name %></td>
+        <td><%= link_to top_route.country_name, top_route_path(top_route) %></td>
         <td><%= top_route.selling_rate %></td>
         <td><%= top_route.asr.to_s + " %" %></td>
         <td><%= top_route.acd %></td>
+        <td><%= top_route.capacity %></td>
+        <td><%= top_route.service_level %></td>
+        <td><%= top_route.quality %></td>
+        <td><%= top_route.remarks %></td>
         <td><%= top_route.select_for_promotion ? 'Yes' : 'No' %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

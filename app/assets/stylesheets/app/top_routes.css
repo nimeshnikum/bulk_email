@@ -1,0 +1,20 @@
+/* 
+    Document   : top_routes
+    Created on : Jul 3, 2014, 11:16:13 AM
+    Author     : nimesh
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+
+.table {
+    white-space: nowrap;
+}
