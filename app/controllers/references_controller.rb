@@ -58,6 +58,18 @@ class ReferencesController < ApplicationController
     redirect_to account_references_url(@account)
   end
 
+  def move_to_prospect
+    @reference = @account.references.find(params[:id])
+
+    if @reference.generate_prospect
+      redirect_to account_references_url, notice: 'Reference was successfully updated.'
+    else
+      flash[:error] = "Reference has already been moved to prospect!"
+      redirect_to account_references_url
+    end
+
+  end
+
   private
 
   def find_account

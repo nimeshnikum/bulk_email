@@ -3,8 +3,6 @@ BulkEmail::Application.routes.draw do
 
   resources :crps
 
-  resources :references
-
   resources :account_contacts
 
   resources :top_routes do
@@ -28,7 +26,11 @@ BulkEmail::Application.routes.draw do
 
   resources :accounts do
     resources :account_contacts
-    resources :references
+    resources :references do
+      member do
+        get :move_to_prospect
+      end
+    end
   end
 
   resources :emails do

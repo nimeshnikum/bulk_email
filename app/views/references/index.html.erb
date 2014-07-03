@@ -9,6 +9,7 @@
       <th><%= model_class.human_attribute_name(:email) %></th>
       <th><%= model_class.human_attribute_name(:contact) %></th>
       <th><%= model_class.human_attribute_name(:phone) %></th>
+      <th>Moved to Prospect?</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -19,9 +20,14 @@
         <td><%= reference.email %></td>
         <td><%= reference.contact %></td>
         <td><%= reference.phone %></td>
+        <td><%= prospect_status(reference) %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_account_reference_path(@account, reference), :class => 'btn btn-mini' %>
+          <%= link_to 'Move to Prospect',
+                      move_to_prospect_account_reference_path(@account, reference), 
+                      :data => {:confirm => "Do you really want to move it to prospect?"},
+                      :class => 'btn btn-mini' unless reference.prospect.present? %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       account_reference_path(@account, reference),
                       :method => :delete,

@@ -9,6 +9,7 @@
       <th><%= model_class.human_attribute_name(:email1) %></th>
       <th><%= model_class.human_attribute_name(:prospect_type) %></th>
       <th><%= model_class.human_attribute_name(:status) %></th>
+      <th><%= model_class.human_attribute_name(:reference) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -19,6 +20,7 @@
         <td><%= prospect.email1 %></td>
         <td><%= prospect.prospect_type %></td>
         <td><%= prospect.status %></td>
+        <td><%= link_to(prospect.reference.try(:company), account_reference_path(prospect.reference.account, prospect.reference)) unless prospect.reference.nil? %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_prospect_path(prospect), :class => 'btn btn-mini' %>
