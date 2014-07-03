@@ -10,4 +10,17 @@ module ApplicationHelper
   def account_options(accounts = Account.all)
     accounts.collect {|acc| [acc.number, acc.id]}
   end
+
+  def custom_error_messages_for(object)
+    return unless object.respond_to?(:errors) && object.errors.any?
+
+    errors_list = ""
+    errors_list << object.errors.full_messages.map { |message| content_tag(:li, message) }.join("\n")
+
+    
+    content_tag(:div, :id => "error_explanation") do
+      content_tag(:h2, "#{pluralize(object.errors.count, "error")} prohibited this post from being saved!") +
+      content_tag(:ul, errors_list.html_safe)
+    end
+  end
 end

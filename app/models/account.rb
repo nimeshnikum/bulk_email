@@ -6,6 +6,9 @@ class Account < ActiveRecord::Base
   has_many :account_reps
   has_many :users, :through => :account_reps
 
+  validates :number, presence: true, numericality: {message: "should be in numerical format only"}, length: {is: 5, message: "can be only 5 digits"}
+  validates :short_name, presence: true, length: {maximum: 6}
+
   def status
     super ? 'Active' : 'Non-active'
   end

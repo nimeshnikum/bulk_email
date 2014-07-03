@@ -1,4 +1,7 @@
 <%= form_for @account, :html => { :class => 'form-horizontal' } do |f| %>
+  
+    <%= custom_error_messages_for(@account) %>
+  
   <div class="control-group">
     <%= f.label :number, :class => 'control-label' %>
     <div class="controls">
