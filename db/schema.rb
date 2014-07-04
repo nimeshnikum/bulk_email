@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140703061258) do
+ActiveRecord::Schema.define(:version => 20140704055648) do
 
   create_table "account_contacts", :force => true do |t|
     t.integer  "account_id"
@@ -58,6 +58,20 @@ ActiveRecord::Schema.define(:version => 20140703061258) do
     t.boolean  "opt_in"
     t.datetime "created_at",                                                                          :null => false
     t.datetime "updated_at",                                                                          :null => false
+  end
+
+  create_table "bootsy_image_galleries", :force => true do |t|
+    t.integer  "bootsy_resource_id"
+    t.string   "bootsy_resource_type"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "bootsy_images", :force => true do |t|
+    t.string   "image_file"
+    t.integer  "image_gallery_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "crp", :force => true do |t|
@@ -114,9 +128,8 @@ ActiveRecord::Schema.define(:version => 20140703061258) do
     t.string   "email"
     t.string   "contact"
     t.string   "phone"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.integer  "prospect_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "roles", :force => true do |t|

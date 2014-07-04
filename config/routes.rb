@@ -1,4 +1,6 @@
 BulkEmail::Application.routes.draw do
+  mount Bootsy::Engine => '/bootsy', as: 'bootsy'
+
   resources :email_templates
 
   resources :crps
