@@ -7,6 +7,7 @@ class AccountRepsController < ApplicationController
   # GET /account_reps.json
   def index
     @account_reps = @user.account_reps.all
+    @new_account_rep = @user.account_reps.new
   end
 
   # GET /account_reps/1
@@ -32,7 +33,8 @@ class AccountRepsController < ApplicationController
     @account_rep = @user.account_reps.new(params[:account_rep])
 
     if @account_rep.save
-      redirect_to [@user, @account_rep], notice: 'Account rep was successfully created.'
+#      redirect_to [@user, @account_rep], notice: 'Account rep was successfully created.'
+      render :js => "window.location.href='" + user_account_reps_url + "'"
     else
       render action: "new"
     end
@@ -44,7 +46,7 @@ class AccountRepsController < ApplicationController
     @account_rep = @user.account_reps.find(params[:id])
 
     if @account_rep.update_attributes(params[:account_rep])
-      redirect_to [@user, @account_rep], notice: 'Account rep was successfully updated.'
+      render :json => render_to_string(:partial => 'account_rep', :locals => {:account_rep => @account_rep}).to_json
     else
       render action: "edit"
     end

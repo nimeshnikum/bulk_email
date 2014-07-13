@@ -1,0 +1,11 @@
+<% @account_reps.each do |account_rep| %>
+  <tr class="rep_row" data-id="<%= account_rep.id %>">
+    <%= render 'account_rep', :account_rep => account_rep %>
+  </tr>
+  <tr class="rep_edit_row" data-id="<%= account_rep.id %>" style="display: none;">
+    <%= render 'edit_account_rep', :account_rep => account_rep %>
+  </tr>
+<% end %>
+<tr class="new_rep_row">
+  <%= render 'new_account_rep' %>
+</tr>

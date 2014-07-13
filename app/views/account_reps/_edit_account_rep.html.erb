@@ -1,0 +1,45 @@
+<td colspan="4" style="width: 100%; padding: 0">
+  <%= form_for [@user, account_rep], :html => { :class => 'form-horizontal', "data-id" => account_rep.id, "data-action" => user_account_rep_path(@user, account_rep), :style => "margin:0" }, :remote => true do |f| %>
+    <table style="width: 100%"><tr>
+        <td style="width: 35%"><%= account_rep.user.email %></td>
+        <td style="width: 25%"><%= f.select :account_id, account_options, {:include_blank => '-- Select --'}, {:style => "width: 120px"} %></td>
+        <td style="width: 20%"><%= f.select :rep_level, rep_level_options, {:include_blank => '-- Select --'}, {:style => "width: 120px"} %></td>
+        <td style="width: 20%">
+          <%#= link_to t('.update', :default => t("helpers.links.update")),
+            '#', :class => "btn btn-mini update_rep#{account_rep.id}_link",
+            "data-id" => account_rep.id, "data-url" => user_account_rep_path(@user, account_rep) %>
+          <%= f.submit 'Update', :class => 'btn btn-mini' %>
+          <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            "#", :class => "btn btn-mini cancel_rep#{account_rep.id}_link", "data-id" => account_rep.id %>
+        </td>
+      </tr></table>
+  <% end %>
+</td>
+
+<script type="text/javascript">
+  $(function(){
+    $("form#edit_account_rep_<%= account_rep.id %>").bind('submit', function(){
+      var rep_id = $(this).data('id');
+      $.ajax({
+        type: "PUT",
+        url: $(this).data('action'),
+        data: $(this).serialize()
+      })
+      .done(function(data){
+        $(".rep_row[data-id=" + rep_id + "]").html(data);
+        $(".rep_row[data-id=" + rep_id + "]").show('slow');
+        $(".rep_edit_row[data-id=" + rep_id + "]").hide();
+      })
+    });
+    function temp(){
+        $(".rep_edit_row[data-id=" + rep_id + "]").load('<%= edit_user_account_rep_path(@user, account_rep) %>');
+    
+    }
+
+    $(".cancel_rep<%= account_rep.id %>_link").bind('click', function(){
+      var rep_id = $(this).data('id');
+      $(".rep_edit_row[data-id=" + rep_id + "]").hide();
+      $(".rep_row[data-id=" + rep_id + "]").show();
+    })
+  })
+</script>

@@ -1,0 +1,22 @@
+<td style="width: 35%"><%= account_rep.user.email %></td>
+<td style="width: 25%"><%= account_rep.account.try(:number) %></td>
+<td style="width: 20%"><%= account_rep.rep_level %></td>
+<td style="width: 20%">
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+    '#', :class => "btn btn-mini edit_rep_link", "data-id" => account_rep.id %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+    user_account_rep_path(@user, account_rep),
+    :method => :delete,
+    :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+    :class => 'btn btn-mini btn-danger' %>
+</td>
+
+<script type="text/javascript">
+  $(function(){
+    $(".edit_rep_link").bind('click', function(){
+      var rep_id = $(this).data('id');
+      $(".rep_row[data-id=" + rep_id + "]").hide();
+      $(".rep_edit_row[data-id=" + rep_id + "]").show();
+    })
+  })
+</script>
