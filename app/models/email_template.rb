@@ -3,4 +3,6 @@ class EmailTemplate < ActiveRecord::Base
 
   scope :default, where(:is_default => true)
   scope :non_default, where(:is_default => false)
+
+  validates :from, email: true, unless: Proc.new {|a| a.from.blank?}
 end

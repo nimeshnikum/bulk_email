@@ -4,6 +4,8 @@ class Reference < ActiveRecord::Base
   belongs_to :account
   has_one :prospect
 
+  validates :email, email: true, unless: Proc.new {|a| a.email.blank?}
+
   def generate_prospect
     return false if prospect.present?
 

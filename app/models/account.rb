@@ -8,6 +8,8 @@ class Account < ActiveRecord::Base
 
   validates :number, presence: true, numericality: {message: "should be in numerical format only"}, length: {is: 5, message: "can be only 5 digits"}
   validates :short_name, presence: true, length: {maximum: 6}
+  validates :legal_email, email: true, unless: Proc.new {|a| a.legal_email.blank?}
+  validates :dispute_email, email: true, unless: Proc.new {|a| a.dispute_email.blank?}
 
   def status
     super ? 'Active' : 'Non-active'
