@@ -10,6 +10,8 @@
 <% if current_user && current_user.sales_user? %>
   <li class="nav-header">Sales user Menu</li>
   <li><%= link_to 'Email Templates', email_templates_path %></li>
-  <li><%= link_to 'Send email to yourself', send_to_self_emails_path %></li>
-  <li><%= link_to 'Send manual email', send_manual_emails_path %></li>
+  <%#*<li>%>
+    <%#= link_to 'Send email to yourself', send_to_self_emails_path %>
+  <%#*</li>%>
+  <li><%= link_to 'Send Email', send_manual_emails_path %></li>
 <% end %>

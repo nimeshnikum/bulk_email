@@ -5,3 +5,14 @@
 .account_rep_form {
     margin: 0;
 }
+
+.richtext_display {
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.wrap-text {
+    white-space: pre;
+}

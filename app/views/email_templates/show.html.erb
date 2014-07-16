@@ -6,13 +6,24 @@
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd><%= @email_template.name %>&nbsp;</dd>
-  <dt><strong><%= model_class.human_attribute_name(:subject) %>:</strong></dt>
-  <dd><%= @email_template.subject %>&nbsp;</dd>
-  <dt><strong><%= model_class.human_attribute_name(:body) %>:</strong></dt>
-  <dd><%= sanitize(@email_template.body) %>&nbsp;</dd>
-  <%#*<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>%>
+  <dt><strong><%= model_class.human_attribute_name(:target) %>:</strong></dt>
+  <dd><%= @email_template.target_text %>&nbsp;</dd>
+  <% if @email_template.target.eql?('C') %>
+    <dt><strong>Customer Role:</strong></dt>
+    <dd><%= @email_template.customer_role %>&nbsp;</dd>
+  <% end %>
+  <dt><strong><%= model_class.human_attribute_name(:template_type) %>:</strong></dt>
+  <dd><%= @email_template.template_type_text %>&nbsp;</dd>
   <dt><strong><%= model_class.human_attribute_name(:from) %>:</strong></dt>
   <dd><%= @email_template.from %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:subject) %>:</strong></dt>
+  <dd><%= @email_template.subject %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:header) %>:</strong></dt>
+  <dd class="richtext_display wrap-text"><%= @email_template.header %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:body) %>:</strong></dt>
+  <dd class="richtext_display"><%= sanitize(@email_template.body) %>&nbsp;</dd>
+  <dt><strong><%= model_class.human_attribute_name(:signature) %>:</strong></dt>
+  <dd class="richtext_display wrap-text"><%= @email_template.signature %>&nbsp;</dd>
   <dt><strong><%= model_class.human_attribute_name(:is_default) %>:</strong></dt>
   <dd><%= @email_template.is_default ? 'Yes' : 'No' %>&nbsp;</dd>
 </dl>
