@@ -9,3 +9,27 @@
 .well {
       padding: 10px !important;
 }
+
+.btn-primary:visited {
+    color: #fff;
+}
+.btn-danger:visited {
+    color: #fff;
+}
+
+.table-striped a:hover{
+    background-color: inherit;
+    color: #000;
+}
+
+.ui-multiselect a:hover{
+    background-color: inherit;
+    color: #000;
+}
+
+.btn:hover, .btn:focus {
+    background-position: 0 -15px;
+    color: #333333 !important;
+    text-decoration: none;
+    transition: background-position 0.1s linear 0s;
+}

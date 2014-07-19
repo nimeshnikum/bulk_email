@@ -1,0 +1,21 @@
+<div class="control-group">
+  <%= f.label :target, :class => 'control-label' %>
+  <div class="controls">
+    <%= f.radio_button :target, 'C' %> Customers &nbsp;
+    <%= f.radio_button :target, 'P' %> Prospects
+  </div>
+</div>
+<div class="control-group customer_role_box">
+  <%= f.label :role_id, 'Customer Role', :class => 'control-label' %>
+  <div class="controls">
+    <%= f.select :role_id, Role.for_account_contact.collect {|r| [r.name, r.id]}, :prompt => '-- Select --' %>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :template_type, :class => 'control-label' %>
+  <div class="controls">
+    <%= f.radio_button :route_type, 'TopRoute' %> Top Routes &nbsp;
+    <%= f.radio_button :route_type, 'CRP' %> CRP &nbsp;
+    <%= f.radio_button :route_type, '' %> NONE
+  </div>
+</div>

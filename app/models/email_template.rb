@@ -18,9 +18,9 @@ class EmailTemplate < ActiveRecord::Base
 
   def template_type_text
     case template_type
-    when 'top_routes'
+    when 'TopRoute'
       'Top Routes'
-    when 'crp'
+    when 'CRP'
       'CRP'
     else
       'NONE'

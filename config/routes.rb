@@ -44,6 +44,8 @@ BulkEmail::Application.routes.draw do
     end
     member do
       get 'select_template'
+      get 'write'
+      post 'send_email'
     end
   end
 

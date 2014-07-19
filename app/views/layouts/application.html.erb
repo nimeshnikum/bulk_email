@@ -37,6 +37,17 @@
 
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag "jquery.tokeninput" %>
+
+    <script type="text/javascript">
+      $(function(){
+        // To avoid conflict when using twitter bootstrap
+        if ($.fn.button.noConflict != undefined) {
+          $.fn.button.noConflict();
+        }
+        $(".multiselect").multiselect();
+
+      })
+    </script>
   </head>
   <body>
 

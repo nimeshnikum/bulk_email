@@ -17,6 +17,42 @@ class EmailsController < ApplicationController
     end
   end
 
+  def new
+    @email_template = EmailTemplate.find(params[:email_template_id])
+    @email = Email.new
+    @email.initiate_from_template(@email_template)
+  end
+
+  def create
+    @email = Email.new(params[:email])
+    @email.sender = current_user
+
+    if @email.save
+      redirect_to write_email_url(@email)
+    else
+      render 'new'
+    end
+  end
+
+  def write
+    @email = Email.find(params[:id])
+    @accounts = current_user.accounts
+  end
+
+  def send_email
+    @email = Email.find(params[:id])
+    @email.attributes = params[:email]
+
+    if @email.valid?
+      top_route_ids = params[:email][:top_route_ids].reject {|a| a.blank?}.flatten
+      account_ids = params[:email][:account_ids].reject {|a| a.blank?}.flatten
+      raise account_ids.inspect
+    else
+      @accounts = current_user.accounts
+      render 'write'
+    end
+  end
+
   def send_manual
     @accounts = current_user.accounts
     @email = Email.new

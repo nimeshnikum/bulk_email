@@ -29,6 +29,8 @@
         <td><%= email_template.is_default ? 'Yes' : 'No' %></td>
         <% if current_user.admin? %>
           <td>
+            <%= link_to t('.send', :default => t("helpers.links.send")),
+                        new_email_path(:email_template_id => email_template.id), :class => 'btn btn-mini' %>
             <%= link_to t('.edit', :default => t("helpers.links.edit")),
                         edit_email_template_path(email_template), :class => 'btn btn-mini' %>
             <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

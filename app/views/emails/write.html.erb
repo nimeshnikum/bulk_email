@@ -1,0 +1,71 @@
+<div class="page-header">
+  <h1>Send manual email</h1>
+</div>
+
+<%= form_for @email, :url => send_email_email_url(@email), :html => { :class => 'form-horizontal', :method => :post } do |f| %>
+  <% if @email.target_is_customer? %>
+    <div class="control-group">
+      <label class="control-label">Customers</label>
+      <div class="controls">
+        <%= f.select :account_ids, @accounts.collect {|a| [a.number, a.id]}, {}, {:multiple => true, :class => 'multiselect'} %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @email.route_type.eql?('TopRoute') %>
+    <div class="control-group">
+      <label class="control-label">Top Routes</label>
+      <div class="controls">
+        <%= f.select :top_route_ids, TopRoute.all.collect {|a| [a.country_name, a.id]}, {}, {:multiple => true, :class => 'multiselect'} %>
+      </div>
+    </div>
+  <% elsif @email.route_type.eql?('CRP') %>
+    <div class="control-group">
+      <label class="control-label">CRP</label>
+      <div class="controls">
+        <%= f.select :crp_ids, Crp.all.collect {|a| [a.country_name, a.id]}, {}, {:multiple => true, :class => 'multiselect'} %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :from, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :from, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :subject, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :subject, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :header, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :header, :class => 'text_area', :rows => 3, :wrap => 'hard' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :body, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.bootsy_area :body, :class => 'bootsy_area', :editor_options => {image: false, color: false} %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :signature, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :signature, :class => 'text_area', :rows => 3, :wrap => 'hard' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit 'Send email', :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                email_templates_path, :class => 'btn' %>
+  </div>
+<% end %>

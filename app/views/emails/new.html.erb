@@ -1,0 +1,26 @@
+<div class="page-header">
+  <h1>Send manual email</h1>
+</div>
+
+<%= form_for @email, :url => emails_path, :html => { :class => 'form-horizontal', :method => :post } do |f| %>
+  <%= f.hidden_field :email_template_id, :value => (@email.email_template_id || @email_template.id) %>
+  <%= render 'emails/target', {:f => f} %>
+
+  <div class="form-actions">
+    <%= f.submit 'Next', :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                email_templates_path, :class => 'btn' %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $(function(){
+    $("#email_top_route_ids").tokenInput("/top_routes/search",
+    {
+      prePopulate: <%= @top_routes.to_json %>,
+      hintText: 'Type in a top route country name',
+      preventDuplicates: true,
+      propertyToSearch: 'country_name'
+    });
+  })
+</script>

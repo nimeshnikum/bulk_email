@@ -1,26 +1,32 @@
-class Email
-  include ActiveModel::Validations
-  include ActiveModel::Conversion
-  extend ActiveModel::Naming
+class Email < ActiveRecord::Base
+  attr_accessor :account_ids, :top_route_ids, :crp_ids
 
-  attr_accessor :from, :to, :subject, :body, :account_ids, :email_template_id, :top_route_ids
+  attr_accessible :account_ids, :top_route_ids, :crp_ids, :from, :subject, :header, :body, :signature
 
-  validates :subject, :body, :email_template_id, :presence => true
-  validate :check_account_ids
+  belongs_to :email_template
+  belongs_to :sender, :class_name => 'User'
 
-  def initialize(attributes = {})
-    attributes.each do |name, value|
-      send("#{name}=", value)
-    end
+  validates :email_template_id, :target, presence: true
+  validates :from, email: true, unless: Proc.new {|a| a.from.blank?}, on: :update
+
+  after_create :copy_from_template
+
+  def initiate_from_template(email_template)
+    self.target = email_template.target
+    self.role_id = email_template.role_id
+    self.route_type = email_template.template_type
   end
 
-  def persisted?
-    false
+  def copy_from_template
+    self.from = email_template.from
+    self.header = email_template.header
+    self.body = email_template.body
+    self.signature = email_template.signature
+    self.subject = email_template.subject
+    self.save!
   end
 
-  def check_account_ids
-    if account_ids.blank?
-      errors.add(:account_ids, "At least one customer should be selected")
-    end
+  def target_is_customer?
+    target == 'C'
   end
 end

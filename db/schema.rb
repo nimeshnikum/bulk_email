@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140714051134) do
+ActiveRecord::Schema.define(:version => 20140716200706) do
 
   create_table "account_contacts", :force => true do |t|
     t.integer  "account_id"
@@ -99,6 +99,24 @@ ActiveRecord::Schema.define(:version => 20140714051134) do
     t.datetime "updated_at",                                                    :null => false
   end
 
+  create_table "email_recipients", :force => true do |t|
+    t.integer  "target_id"
+    t.string   "target_type"
+    t.string   "to"
+    t.text     "cc"
+    t.datetime "sent_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "email_routes", :force => true do |t|
+    t.integer  "email_id"
+    t.integer  "route_id"
+    t.string   "route_type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "email_templates", :force => true do |t|
     t.string   "name"
     t.string   "subject"
@@ -112,6 +130,22 @@ ActiveRecord::Schema.define(:version => 20140714051134) do
     t.string   "target"
     t.integer  "role_id"
     t.string   "template_type"
+  end
+
+  create_table "emails", :force => true do |t|
+    t.integer  "sender_id"
+    t.integer  "email_template_id"
+    t.string   "from"
+    t.string   "target"
+    t.string   "route_type"
+    t.integer  "role_id"
+    t.text     "header"
+    t.text     "body"
+    t.text     "signature"
+    t.string   "subject"
+    t.datetime "sent_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "prospects", :force => true do |t|

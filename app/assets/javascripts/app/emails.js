@@ -1,4 +1,18 @@
 $(function(){
+    toggle_customer_role($("input[name='email[target]']:radio:checked").val());
+
+    $("input[name='email[target]']:radio").change(function(){
+        toggle_customer_role(this.value);
+    })
+
+    function toggle_customer_role(value)
+    {
+        if(value == 'C')
+            $(".customer_role_box").show();
+        else
+            $(".customer_role_box").hide();
+    }
+  
     $(".top_routes_box").show();
 
     $("#email_email_template_id").change(function(){
@@ -17,10 +31,10 @@ $(function(){
             })
         }
 
-//        if($(this).val()=='3')
-//            $(".top_routes_box").show();
-//        else
-//            $(".top_routes_box").hide();
+    //        if($(this).val()=='3')
+    //            $(".top_routes_box").show();
+    //        else
+    //            $(".top_routes_box").hide();
     })
 
 

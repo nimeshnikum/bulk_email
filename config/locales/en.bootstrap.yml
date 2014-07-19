@@ -12,6 +12,7 @@ en:
       new: "New"
       edit: "Edit"
       update: "Update"
+      send: "Send"
     titles:
       edit: "Edit %{model}"
       save: "Save %{model}"
