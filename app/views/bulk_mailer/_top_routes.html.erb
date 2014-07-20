@@ -1,20 +1,22 @@
-<table cellpadding="0" cellspacing="0" border="1">
-  <tr>
-    <th>Destination</th>
-    <th>Quality</th>
-    <th>Rate</th>
-    <th>ASR</th>
-    <th>ACD</th>
-    <th>Capacity</th>
-  </tr>
-  <% @top_routes.each do |top_route| %>
+<% unless @email.top_routes.blank? %>
+  <table cellpadding="0" cellspacing="0" border="1">
     <tr>
-      <td><%= top_route.country_name %></td>
-      <td><%= top_route.quality %></td>
-      <td><%= top_route.selling_rate %></td>
-      <td><%= top_route.asr %>%</td>
-      <td><%= top_route.acd %></td>
-      <td><%= top_route.capacity %></td>
+      <th>Destination</th>
+      <th>Quality</th>
+      <th>Rate</th>
+      <th>ASR</th>
+      <th>ACD</th>
+      <th>Capacity</th>
     </tr>
-  <% end %>
-</table>
+    <% @email.top_routes.each do |top_route| %>
+      <tr>
+        <td><%= top_route.country_name %></td>
+        <td><%= top_route.quality %></td>
+        <td><%= top_route.selling_rate %></td>
+        <td><%= top_route.asr %>%</td>
+        <td><%= top_route.acd %></td>
+        <td><%= top_route.capacity %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

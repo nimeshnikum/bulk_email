@@ -21,7 +21,7 @@
         <td><%= account_contact.phone %></td>
         <td><%= account_contact.email %></td>
         <td><%= account_contact.skype %></td>
-        <td><%= account_contact.role.name %></td>
+        <td><%= account_contact.role.try(:name) %></td>
         <td><%= account_contact.main_contact ? 'Yes' : 'No' %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

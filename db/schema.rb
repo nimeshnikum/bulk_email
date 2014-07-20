@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(:version => 20140716200706) do
   end
 
   create_table "email_recipients", :force => true do |t|
+    t.integer  "email_id"
     t.integer  "target_id"
     t.string   "target_type"
     t.string   "to"

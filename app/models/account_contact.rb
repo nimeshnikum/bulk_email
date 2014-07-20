@@ -6,6 +6,7 @@ class AccountContact < ActiveRecord::Base
 
   scope :main, where(:main_contact => true)
   scope :cc, where(:main_contact => false)
+  scope :for_role, lambda {|role_id| where(:role_id => role_id)}
 
   validates :email, email: true, unless: Proc.new {|a| a.email.blank?}
 end

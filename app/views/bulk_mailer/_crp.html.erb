@@ -1,0 +1,28 @@
+<% unless @email.crps.blank? %>
+  <table cellpadding="0" cellspacing="0" border="1">
+    <tr>
+      <th>Country Code</th>
+      <th>Country Name</th>
+      <th>Quality</th>
+      <th>Selling Rate</th>
+      <th>Billing Increment</th>
+      <th>ASR</th>
+      <th>ACD</th>
+      <th>PDD</th>
+      <th>Capacity</th>
+    </tr>
+    <% @email.crps.each do |crp| %>
+      <tr>
+        <td><%= crp.country_code %></td>
+        <td><%= crp.country_name %></td>
+        <td><%= crp.quality %></td>
+        <td><%= crp.selling_rate %></td>
+        <td><%= crp.billing_increment %></td>
+        <td><%= crp.asr %>%</td>
+        <td><%= crp.acd %></td>
+        <td><%= crp.pdd %></td>
+        <td><%= crp.capacity %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

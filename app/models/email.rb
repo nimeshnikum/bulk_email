@@ -1,8 +1,12 @@
 class Email < ActiveRecord::Base
-  attr_accessor :account_ids, :top_route_ids, :crp_ids
+  attr_accessible :email_template_id, :target, :role_id, :route_type, :account_ids, :top_route_ids, :crp_ids, :from, :subject, :header, :body, :signature, :sent_at
 
-  attr_accessible :account_ids, :top_route_ids, :crp_ids, :from, :subject, :header, :body, :signature
-
+  has_many :email_recipients
+  has_many :accounts, :through => :email_recipients, :source => :target, :source_type => 'Account'
+  has_many :email_routes
+  has_many :top_routes, :through => :email_routes, :source => :route, :source_type => 'TopRoute'
+  has_many :crps, :through => :email_routes, :source => :route, :source_type => 'Crp'
+  
   belongs_to :email_template
   belongs_to :sender, :class_name => 'User'
 

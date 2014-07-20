@@ -44,9 +44,23 @@ class EmailsController < ApplicationController
     @email.attributes = params[:email]
 
     if @email.valid?
-      top_route_ids = params[:email][:top_route_ids].reject {|a| a.blank?}.flatten
-      account_ids = params[:email][:account_ids].reject {|a| a.blank?}.flatten
-      raise account_ids.inspect
+      if @email.target == 'C' && @email.account_ids.present?
+        @email.account_ids.each do |acc_id|
+          begin
+            account = Account.find(acc_id)
+            to_emails, cc_emails = account.collect_emails(@email.role_id)
+            recipient = account.email_recipients.build(email: @email, to: to_emails.join(", "), cc: cc_emails.join(", "))
+            BulkMailer.send_manual(current_user, recipient).deliver
+            recipient.update_attributes(sent_at: Time.now)
+          rescue Exception => ex
+            puts ex.inspect
+          end
+        end
+      elsif @email.target == 'P' && @email.account_ids.present?
+      end
+      @email.sent_at = Time.now
+      @email.save!
+      redirect_to email_templates_url
     else
       @accounts = current_user.accounts
       render 'write'

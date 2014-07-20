@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   has_many :account_reps
   has_many :accounts, :through => :account_reps
+  has_many :email_recipients
+  has_many :emails, :through => :email_recipients
   belongs_to :role
 
   def password_required?

@@ -1,3 +1,28 @@
-<p><%= sanitize(@email.body) %> </p>
+<div style="white-space: pre-line;">
+  <%= @email.header.to_s.strip %>
+</div>
 
-<%= render :partial => "top_routes" unless @top_routes.blank? %>
+<% if @email.route_type == 'TopRoute' %>
+  <% body_parts = @email.body.split('[TOP ROUTES GOES HERE]') %>
+  <% body_parts.each_with_index do |part, i| %>
+    <%= sanitize(part) %>
+    <% if i < body_parts.length - 1 %>
+      <%= render 'top_routes' %>
+    <% end %>
+  <% end %>
+<% elsif @email.route_type == 'CRP' %>
+  <% body_parts = @email.body.split('[CRP GOES HERE]') %>
+  <% body_parts.each_with_index do |part, i| %>
+    <%= sanitize(part) %>
+    <% if i < body_parts.length - 1 %>
+      <%= render 'crp' %>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= sanitize(@email.body) %>
+<% end %>
+
+<div style="white-space: pre-line;">
+  <%= @email.signature.to_s.strip %>
+</div>
+
