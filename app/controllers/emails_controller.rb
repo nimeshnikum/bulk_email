@@ -49,20 +49,24 @@ class EmailsController < ApplicationController
 
     if @email.valid?
       @email.email_recipients.each do |recipient|
-        recipient.email = @email
-        target = recipient.target
-        if target.instance_of?(Account)
-          to_emails, cc_emails = target.collect_emails(@email.role_id)
-          recipient.to = to_emails.join(", ")
-          recipient.cc = cc_emails.join(", ")
-        elsif target.instance_of?(Prospect)
-          recipient.to = target.email1
-          recipient.cc = target.email2
-        end
+        begin
+          recipient.email = @email
+          target = recipient.target
+          if target.instance_of?(Account)
+            to_emails, cc_emails = target.collect_emails(@email.role_id)
+            recipient.to = to_emails.join(", ")
+            recipient.cc = cc_emails.join(", ")
+          elsif target.instance_of?(Prospect)
+            recipient.to = target.email1
+            recipient.cc = target.email2
+          end
 
-        BulkMailer.send_manual(current_user, recipient).deliver
-        recipient.sent_at = Time.now
-        recipient.save!
+          BulkMailer.send_manual(current_user, recipient).deliver
+          recipient.sent_at = Time.now
+          recipient.save!
+        rescue Exception => ex
+          puts ex.inspect
+        end
       end
       @email.sent_at = Time.now
       @email.save!
@@ -75,6 +79,13 @@ class EmailsController < ApplicationController
       end
       render 'write'
     end
+  end
+
+  def preview
+    @email = Email.find(params[:id])
+    @email.attributes = params[:email]
+
+    render :json => render_to_string(:partial => 'preview').to_json
   end
 
   def send_manual

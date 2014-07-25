@@ -78,7 +78,37 @@
 
   <div class="form-actions">
     <%= f.submit 'Send email', :class => 'btn btn-primary' %>
+    <%= link_to 'Preview', 'javascript:', :class => 'btn preview-btn', 'data-action' => preview_email_path(@email) %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 email_templates_path, :class => 'btn' %>
   </div>
 <% end %>
+
+<div id="preview" title="Preview" style="display: none; width: 700px;">
+  Testing...
+</div>
+
+<script type="text/javascript">
+  $(function(){
+    $("a.preview-btn").click(function(){
+      $.ajax({
+        type: "GET",
+        url: $(this).data('action'),
+        data: $(this).parents('form').serialize()
+      })
+      .done(function(data){
+        $("#preview").html(data);
+        $("#preview").dialog({
+          width: 800,
+           buttons: {
+            Close: function() {
+              $(this).dialog( "close" );
+            }
+          }
+        });
+      })
+      
+    })
+  })
+  
+</script>
