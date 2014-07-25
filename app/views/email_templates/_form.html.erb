@@ -48,6 +48,12 @@
     <%= f.label :body, :class => 'control-label' %>
     <div class="controls">
       <%= f.bootsy_area :body, :class => 'bootsy_area', :editor_options => {image: false, color: false} %>
+      <span>
+        <strong>Keywords:</strong>
+        <p>[TOP ROUTES GOES HERE]</p>
+        <p>[CRP GOES HERE]</p>
+        <p>[CUSTOMER_NAME]</p>
+      </span>
     </div>
   </div>
   <div class="control-group">
@@ -66,6 +72,6 @@
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                email_templates_path, :class => 'btn' %>
+      email_templates_path, :class => 'btn' %>
   </div>
 <% end %>

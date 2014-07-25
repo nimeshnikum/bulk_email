@@ -10,6 +10,13 @@
         <%= f.select :account_ids, @accounts.collect {|a| [a.number, a.id]}, {}, {:multiple => true, :class => 'multiselect'} %>
       </div>
     </div>
+  <% elsif @email.target_is_prospect? %>
+    <div class="control-group">
+      <label class="control-label">Prospects</label>
+      <div class="controls">
+        <%= f.select :prospect_ids, @prospects.collect {|p| [p.company_name, p.id]}, {}, {:multiple => true, :class => 'multiselect'} %>
+      </div>
+    </div>
   <% end %>
 
   <% if @email.route_type.eql?('TopRoute') %>
@@ -53,6 +60,12 @@
     <%= f.label :body, :class => 'control-label' %>
     <div class="controls">
       <%= f.bootsy_area :body, :class => 'bootsy_area', :editor_options => {image: false, color: false} %>
+      <span>
+        <strong>Keywords:</strong>
+        <p>[TOP ROUTES GOES HERE]</p>
+        <p>[CRP GOES HERE]</p>
+        <p>[CUSTOMER_NAME]</p>
+      </span>
     </div>
   </div>
 

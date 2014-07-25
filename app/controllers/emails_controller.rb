@@ -36,7 +36,11 @@ class EmailsController < ApplicationController
 
   def write
     @email = Email.find(params[:id])
-    @accounts = current_user.accounts
+    if @email.target_is_customer?
+      @accounts = current_user.accounts
+    else
+      @prospects = Prospect.all
+    end
   end
 
   def send_email
@@ -44,25 +48,31 @@ class EmailsController < ApplicationController
     @email.attributes = params[:email]
 
     if @email.valid?
-      if @email.target == 'C' && @email.account_ids.present?
-        @email.account_ids.each do |acc_id|
-          begin
-            account = Account.find(acc_id)
-            to_emails, cc_emails = account.collect_emails(@email.role_id)
-            recipient = account.email_recipients.build(email: @email, to: to_emails.join(", "), cc: cc_emails.join(", "))
-            BulkMailer.send_manual(current_user, recipient).deliver
-            recipient.update_attributes(sent_at: Time.now)
-          rescue Exception => ex
-            puts ex.inspect
-          end
+      @email.email_recipients.each do |recipient|
+        recipient.email = @email
+        target = recipient.target
+        if target.instance_of?(Account)
+          to_emails, cc_emails = target.collect_emails(@email.role_id)
+          recipient.to = to_emails.join(", ")
+          recipient.cc = cc_emails.join(", ")
+        elsif target.instance_of?(Prospect)
+          recipient.to = target.email1
+          recipient.cc = target.email2
         end
-      elsif @email.target == 'P' && @email.account_ids.present?
+
+        BulkMailer.send_manual(current_user, recipient).deliver
+        recipient.sent_at = Time.now
+        recipient.save!
       end
       @email.sent_at = Time.now
       @email.save!
       redirect_to email_templates_url
     else
-      @accounts = current_user.accounts
+      if @email.target_is_customer?
+        @accounts = current_user.accounts
+      else
+        @prospects = Prospect.all
+      end
       render 'write'
     end
   end

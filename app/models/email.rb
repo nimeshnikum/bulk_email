@@ -1,8 +1,9 @@
 class Email < ActiveRecord::Base
-  attr_accessible :email_template_id, :target, :role_id, :route_type, :account_ids, :top_route_ids, :crp_ids, :from, :subject, :header, :body, :signature, :sent_at
+#  attr_accessible :email_template_id, :target, :role_id, :route_type, :account_ids, :prospect_ids, :top_route_ids, :crp_ids, :from, :subject, :header, :body, :signature, :sent_at
 
   has_many :email_recipients
   has_many :accounts, :through => :email_recipients, :source => :target, :source_type => 'Account'
+  has_many :prospects, :through => :email_recipients, :source => :target, :source_type => 'Prospect'
   has_many :email_routes
   has_many :top_routes, :through => :email_routes, :source => :route, :source_type => 'TopRoute'
   has_many :crps, :through => :email_routes, :source => :route, :source_type => 'Crp'
@@ -32,5 +33,9 @@ class Email < ActiveRecord::Base
 
   def target_is_customer?
     target == 'C'
+  end
+
+  def target_is_prospect?
+    target == 'P'
   end
 end
