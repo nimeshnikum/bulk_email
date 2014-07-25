@@ -1,6 +1,8 @@
 class Email < ActiveRecord::Base
 #  attr_accessible :email_template_id, :target, :role_id, :route_type, :account_ids, :prospect_ids, :top_route_ids, :crp_ids, :from, :subject, :header, :body, :signature, :sent_at
 
+  scope :ordered, order('sent_at asc')
+
   has_many :email_recipients
   has_many :accounts, :through => :email_recipients, :source => :target, :source_type => 'Account'
   has_many :prospects, :through => :email_recipients, :source => :target, :source_type => 'Prospect'
@@ -37,5 +39,13 @@ class Email < ActiveRecord::Base
 
   def target_is_prospect?
     target == 'P'
+  end
+
+  def targets
+    if target == 'C'
+      accounts.collect(&:number)
+    else
+      prospects.collect(&:company_name)
+    end
   end
 end
