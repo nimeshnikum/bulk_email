@@ -22,6 +22,8 @@
   <%= sanitize(@email.body) %>
 <% end %>
 
+<%= image_tag attachments['test.jpg'].url %>
+
 <div style="white-space: pre-line;">
   <%= @email.signature.to_s.strip %>
 </div>

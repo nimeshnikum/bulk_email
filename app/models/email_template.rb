@@ -1,4 +1,6 @@
 class EmailTemplate < ActiveRecord::Base
+  include Bootsy::Container
+
   attr_accessible :body, :from, :name, :subject, :is_default, :target, :role_id, :template_type, :header, :signature
 
   belongs_to :role

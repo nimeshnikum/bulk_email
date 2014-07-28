@@ -31,6 +31,8 @@
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               email_templates_path, :class => 'btn'  %>
+  <%= link_to t('.send', :default => t("helpers.links.send")),
+              new_email_path(:email_template_id => @email_template.id), :class => 'btn' %>
   <% if current_user.admin? %>
     <%= link_to t('.edit', :default => t("helpers.links.edit")),
                 edit_email_template_path(@email_template), :class => 'btn' %>

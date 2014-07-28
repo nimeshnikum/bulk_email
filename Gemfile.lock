@@ -160,6 +160,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   less-rails
+  mail
   mongrel (>= 1.2.0.pre2)
   mysql2
   rails (= 3.2.13)
