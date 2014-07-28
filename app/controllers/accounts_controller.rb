@@ -37,4 +37,12 @@ class AccountsController < ApplicationController
   def show
     @account = Account.find(params[:id])
   end
+
+  def destroy
+    @account = Account.find(params[:id])
+
+    @account.destroy
+
+    redirect_to accounts_url, notice: 'Account was successfully deleted.'
+  end
 end

@@ -1,9 +1,9 @@
 class Account < ActiveRecord::Base
   # attr_accessible :title, :body
 #  attr_protected :id, :created_at, :updated_at
-  has_many :account_contacts
-  has_many :references
-  has_many :account_reps
+  has_many :account_contacts, dependent: :destroy
+  has_many :references, dependent: :destroy
+  has_many :account_reps, dependent: :destroy
   has_many :users, :through => :account_reps
   has_many :email_recipients, :as => :target
   has_many :emails, :through => :email_recipients
