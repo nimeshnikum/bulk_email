@@ -1,5 +1,6 @@
 class Email < ActiveRecord::Base
-#  attr_accessible :email_template_id, :target, :role_id, :route_type, :account_ids, :prospect_ids, :top_route_ids, :crp_ids, :from, :subject, :header, :body, :signature, :sent_at
+  include Bootsy::Container
+  attr_accessible :email_template_id, :target, :role_id, :route_type, :account_ids, :prospect_ids, :top_route_ids, :crp_ids, :from, :subject, :header, :body, :signature, :sent_at
 
   scope :ordered, order('sent_at asc')
 
