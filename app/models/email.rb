@@ -2,7 +2,8 @@ class Email < ActiveRecord::Base
   include Bootsy::Container
   attr_accessible :email_template_id, :target, :role_id, :route_type, :account_ids, :prospect_ids, :top_route_ids, :crp_ids, :from, :subject, :header, :body, :signature, :sent_at
 
-  scope :ordered, order('sent_at asc')
+  # Ordering the unread emails first, then in descending order by sent_at
+  scope :ordered, order("case when sent_at is null then DATE('2030-12-31') else sent_at end desc")
 
   has_many :email_recipients
   has_many :accounts, :through => :email_recipients, :source => :target, :source_type => 'Account'
