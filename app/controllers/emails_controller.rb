@@ -62,6 +62,7 @@ class EmailsController < ApplicationController
           end
 
           BulkMailer.send_manual(current_user, recipient).deliver
+	  sleep 5
           recipient.sent_at = Time.now
           recipient.save!
 #        rescue Exception => ex

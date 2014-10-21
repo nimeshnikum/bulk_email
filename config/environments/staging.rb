@@ -14,7 +14,7 @@ BulkEmail::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.default_url_options = { :host => '23.92.17.40' }
 
@@ -36,4 +36,6 @@ BulkEmail::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = false
+
+  ENV['PATH'] = "/usr/local/bin:#{ENV['PATH']}"
 end
