@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def account_options(accounts = Account.all)
-    accounts.collect {|acc| [acc.number, acc.id]}
+    accounts.collect {|acc| [account_title(acc), acc.id]}
   end
 
   def custom_error_messages_for(object)
@@ -22,5 +22,9 @@ module ApplicationHelper
       content_tag(:h2, "#{pluralize(object.errors.count, "error")} prohibited this post from being saved!") +
       content_tag(:ul, errors_list.html_safe)
     end
+  end
+
+  def account_title(account, len = 40)
+    account.number + " - " + truncate(account.short_name, length: len)
   end
 end
