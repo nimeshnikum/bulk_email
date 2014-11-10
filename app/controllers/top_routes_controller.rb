@@ -85,4 +85,13 @@ class TopRoutesController < ApplicationController
     @top_routes = TopRoute.where("country_name like ?", "#{params[:q]}%").select([:country_name, :id])
     render :json => @top_routes.to_json
   end
+
+  def import
+    unless params[:file].blank?
+      TopRoute.import(params[:file])
+      redirect_to top_routes_url, notice: "Top routes imported"
+    else
+      redirect_to top_routes_url
+    end
+  end
 end

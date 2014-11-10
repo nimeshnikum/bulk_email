@@ -10,6 +10,7 @@ BulkEmail::Application.routes.draw do
   resources :top_routes do
     collection do
       get 'search'
+      post 'import'
     end
   end
 
