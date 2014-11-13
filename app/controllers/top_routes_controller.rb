@@ -88,7 +88,8 @@ class TopRoutesController < ApplicationController
 
   def import
     unless params[:file].blank?
-      TopRoute.import(params[:file])
+      full_upload = params[:full_upload_button] ? true : false
+      TopRoute.import(params[:file], full_upload)
       redirect_to top_routes_url, notice: "Top routes imported"
     else
       redirect_to top_routes_url

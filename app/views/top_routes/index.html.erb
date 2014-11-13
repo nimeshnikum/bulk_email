@@ -53,8 +53,10 @@
 
 <div class="well">
   <h5>Bulk Import</h5>
-  <%= form_tag import_top_routes_path, multipart: true do %>
+  <%= form_tag import_top_routes_path, multipart: true, id: 'top_routes_upload_form' do %>
     <%= file_field_tag :file %>
-    <%= submit_tag "Import" %>
+    <%= button_tag "Partial Upload", :name => 'partial_upload_button' %>
+    &nbsp; | or | &nbsp;
+    <%= button_tag "Full Upload", :name => 'full_upload_button' %>
   <% end %>
 </div>

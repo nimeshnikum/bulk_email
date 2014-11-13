@@ -5,7 +5,12 @@ class TopRoute < ActiveRecord::Base
 
   validates :country_name, presence: true
 
-  def self.import(file)
+  def self.import(file, full_upload = false)
+    # In case of full upload, first delete all existing records
+    if full_upload
+      self.destroy_all
+    end
+
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(1)
     (2..spreadsheet.last_row).each do |i|
