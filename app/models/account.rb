@@ -1,5 +1,7 @@
 class Account < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :number, :short_name, :official_name, :address, :legal_email, :dispute_email, :credit_limit, :credit_limit_history, :max_block_limit, :payment_term,
+    :payment_cycle, :customer_type, :last_invoice_amount, :last_invoice_date, :current_balance, :current_balance_date, :grade, :status, :status_history, :opt_in
+  
 #  attr_protected :id, :created_at, :updated_at
   has_many :account_contacts, dependent: :destroy
   has_many :references, dependent: :destroy
@@ -45,5 +47,29 @@ class Account < ActiveRecord::Base
 
   def title
     number || short_name
+  end
+
+  def self.import(file)
+    spreadsheet = open_spreadsheet(file)
+    header = spreadsheet.row(1)
+    (2..spreadsheet.last_row).each do |i|
+      row = Hash[[header, spreadsheet.row(i)].transpose]
+#      raise row["number"].inspect
+#      raise find_by_number(row["number"].to_i).inspect
+      record = find_by_number(row["number"].to_i) || new
+#      raise accessible_attributes.inspect
+      record.attributes = row.to_hash.slice(*accessible_attributes)
+#      raise record.inspect
+      record.save!
+    end
+  end
+
+  def self.open_spreadsheet(file)
+    case File.extname(file.original_filename)
+    when ".csv" then Roo::Csv.new(file.path, nil, :ignore)
+    when ".xls" then Roo::Excel.new(file.path, nil, :ignore)
+    when ".xlsx" then Roo::Excelx.new(file.path, nil, :ignore)
+    else raise "Unknown file type: #{file.original_filename}"
+    end
   end
 end

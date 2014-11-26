@@ -34,6 +34,10 @@ BulkEmail::Application.routes.draw do
         get :move_to_prospect
       end
     end
+    
+    collection do
+      post 'import'
+    end
   end
 
   resources :emails do

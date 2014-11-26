@@ -45,4 +45,13 @@ class AccountsController < ApplicationController
 
     redirect_to accounts_url, notice: 'Account was successfully deleted.'
   end
+
+  def import
+    unless params[:file].blank?
+      Account.import(params[:file])
+      redirect_to accounts_url, notice: "Account records imported"
+    else
+      redirect_to accounts_url
+    end
+  end
 end

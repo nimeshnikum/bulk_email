@@ -42,3 +42,13 @@
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_account_path,
             :class => 'btn btn-primary' %>
+
+<br/><br/>or<br/><br/>
+
+<div class="well">
+  <h5>Bulk Import</h5>
+  <%= form_tag import_accounts_path, multipart: true, id: 'top_routes_upload_form' do %>
+    <%= file_field_tag :file %>
+    <%= button_tag "Partial Upload" %>
+  <% end %>
+</div>
