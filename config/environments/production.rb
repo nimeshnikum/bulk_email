@@ -64,4 +64,11 @@ BulkEmail::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+
+  config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "[Bulk-Mailer Production] ",
+    :sender_address => %{"notifier" <notifier@bulk-email.com>},
+    :exception_recipients => %w{nimesh.nikum@gmail.com}
+  }
 end
