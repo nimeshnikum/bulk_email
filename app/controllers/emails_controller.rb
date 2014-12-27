@@ -37,7 +37,7 @@ class EmailsController < ApplicationController
   def write
     @email = Email.find(params[:id])
     if @email.target_is_customer?
-      @accounts = current_user.accounts
+      @accounts = current_user.accounts.uniq
     else
       @prospects = Prospect.all
     end
@@ -52,6 +52,7 @@ class EmailsController < ApplicationController
         begin
           recipient.email = @email
           target = recipient.target
+          
           if target.instance_of?(Account)
             to_emails, cc_emails = target.collect_emails(@email.role_id)
             recipient.to = to_emails.join(", ")
@@ -60,9 +61,11 @@ class EmailsController < ApplicationController
             recipient.to = target.email1
             recipient.cc = target.email2
           end
+          next if recipient.to.blank?
+          recipient.save
 
-          BulkMailer.send_manual(current_user, recipient).deliver
-	  sleep 5
+          BulkMailer.send_manual(recipient.id).deliver
+
           recipient.sent_at = Time.now
           recipient.save!
 #        rescue Exception => ex
